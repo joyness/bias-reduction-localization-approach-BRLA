@@ -12,7 +12,7 @@ L_noise=length(noi);
 %% RSSD_TDOA_LSM_BRM
 mse_RSSD_TDOA_LSM_BRM_x = zeros(L_noise,1);
 mse_RSSD_TDOA_LSM_BRM_t = zeros(L_noise,1);
-LSM_BRM_CDF=zeros(N_MC,1);
+ACT_WIV_CDF=zeros(N_MC,1);
 warning off
 for nn2=1:L_noise 
     disp(['parameter #' num2str(nn2) '/' num2str(numel(noi))  ]);
@@ -30,7 +30,7 @@ for nn2=1:L_noise
         aa = [ai1,ai2];        % sort the coordinates into a matrix.
         aa = aa';              % size(aa)==(2,N)
         aa(:,1)=[];
-        m = length(aa(1,:));       % Number of sensors after deleting¡¡refer¡¡anchor.
+        m = length(aa(1,:));       % Number of sensors after deletingÂ¡Â¡referÂ¡Â¡anchor.
         r = sqrt(sum((aa-repmat(x,1,m)).^2));
         r = r';                % size(r)==(m,1)
         noise1=sqrt(noi(nn2))*randn(m,1);
@@ -81,6 +81,6 @@ for nn2=1:L_noise
         mse_RSSD_TDOA_LSM_BRM_t(nn2) = mse_RSSD_TDOA_LSM_BRM_t(nn2)+toc;
         % Calculate mse of x
         mse_RSSD_TDOA_LSM_BRM_x(nn2)=mse_RSSD_TDOA_LSM_BRM_x(nn2)+sum((x_t2-x).^2);
-        LSM_BRM_CDF(mc)=sqrt(sum(x_t2-x).^2);
+        ACT_WIV_CDF(mc)=sqrt(sum(x_t2-x).^2);
     end
 end
